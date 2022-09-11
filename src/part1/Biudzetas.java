@@ -1,11 +1,12 @@
 package part1;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Biudzetas {
-    private PajamuIrasas[] pajamos = new PajamuIrasas[100];
-    private IslaiduIrasas[] islaidos = new IslaiduIrasas[100];
+    private ArrayList<PajamuIrasas> pajamos = new ArrayList<>();
+    private ArrayList<IslaiduIrasas> islaidos = new ArrayList<>();
 
     public int gautiPajamuSuma() {
         int suma = 0;
@@ -35,130 +36,135 @@ public class Biudzetas {
 
     public void pridetiPajamuIrasa() {
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < pajamos.length; i++) {
-            if (pajamos[i] == null) {
-                System.out.println("Áveskite pajamø sumà");
-                int suma = sc.nextInt();
+
+        System.out.println("Áveskite pajamø sumà");
+        int suma = sc.nextInt();
 //                System.out.println("Áveskite datà (yyyy-MM-dd)");
 //                String data = sc.next();
-                String data = "2022-12-12";
-                System.out.println("""
-                    Pasirinkite pajamø kategorijà:
-                    [1] - atlyginimas,
-                    [2] - dovana,
-                    [3] - loterija,
-                    [4] - paveldëjimas,
-                    [5] - kyðis,
-                    [6] - kita""");
-                int kategorijaInput = sc.nextInt();
-                String kategorija = "";
-                switch (kategorijaInput) {
-                    case 1:
-                        kategorija = "atlyginimas";
-                        break;
-                    case 2:
-                        kategorija = "dovana";
-                        break;
-                    case 3:
-                        kategorija = "loterija";
-                        break;
-                    case 4:
-                        kategorija = "paveldëjimas";
-                        break;
-                    case 5:
-                        kategorija = "kyðis";
-                        break;
-                    case 6:
-                        kategorija = "kita";
-                        break;
-                }
+        String data = "2022-12-12";
+        System.out.println("""
+            Pasirinkite pajamø kategorijà:
+            [1] - atlyginimas,
+            [2] - dovana,
+            [3] - loterija,
+            [4] - paveldëjimas,
+            [5] - kyðis,
+            [6] - kita""");
+        int kategorijaInput = sc.nextInt();
+        String kategorija = "";
+        switch (kategorijaInput) {
+            case 1:
+                kategorija = "atlyginimas";
+                break;
+            case 2:
+                kategorija = "dovana";
+                break;
+            case 3:
+                kategorija = "loterija";
+                break;
+            case 4:
+                kategorija = "paveldëjimas";
+                break;
+            case 5:
+                kategorija = "kyðis";
+                break;
+            case 6:
+                kategorija = "kita";
+                break;
+        }
 //                String kategorija = "katEgory";
 //                System.out.println("At tai banko ánaðas?");
 //                boolean pozymisArIBanka = sc.nextBoolean();
-                boolean pozymisArIBanka = true;
+        boolean pozymisArIBanka = true;
 //                System.out.println("Papildoma informacija");
 //                String papildomaInfo = sc.next();
-                String papildomaInfo = "Nesi Mates tokios info";
-                pajamos[i] = new PajamuIrasas(suma, data, kategorija, pozymisArIBanka, papildomaInfo);
-                break;
-            }
-        }
+        String papildomaInfo = "Nesi Mates tokios info";
+        pajamos.add(new PajamuIrasas(suma, data, kategorija, pozymisArIBanka, papildomaInfo));
+
         gautiPajamuSuma();
     }
 
     public void pridetiIslaiduIrasa() {
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < islaidos.length; i++) {
-            if (islaidos[i] == null) {
-                System.out.println("Áveskite iðlaidø sumà");
-                int suma = sc.nextInt();
-                sc.nextLine();
+
+        System.out.println("Áveskite iðlaidø sumà");
+        int suma = sc.nextInt();
+        sc.nextLine();
 //                System.out.println("Áveskite datà ir laikà formatu yyyy, MM, dd, HH:mm");
 //                String laikas = sc.nextLine();
-                String laikas = "2022-08-08 15:45";
-                System.out.println("Pasirinkite iðlaidø kategorijà");
-                System.out.println("""
-                    Pasirinkite veiksmà:
-                    [1] - mokesèiai,
-                    [2] - nuoma,
-                    [3] - maistas,
-                    [4] - pramogos,
-                    [5] - dovanos,
-                    [6] - kita""");
+        String laikas = "2022-08-08 15:45";
+        System.out.println("Pasirinkite iðlaidø kategorijà");
+        System.out.println("""
+            Pasirinkite veiksmà:
+            [1] - mokesèiai,
+            [2] - nuoma,
+            [3] - maistas,
+            [4] - pramogos,
+            [5] - dovanos,
+            [6] - kita""");
 
-                int kategorijaInput = sc.nextInt();
-                String kategorija = "";
-                switch (kategorijaInput) {
-                    case 1:
-                        kategorija = "mokesèiai";
-                        break;
-                    case 2:
-                        kategorija = "nuoma";
-                        break;
-                    case 3:
-                        kategorija = "maistas";
-                        break;
-                    case 4:
-                        kategorija = "pramogos";
-                        break;
-                    case 5:
-                        kategorija = "dovanos";
-                        break;
-                    case 6:
-                        kategorija = "kita";
-                        break;
-                }
+        int kategorijaInput = sc.nextInt();
+        String kategorija = "";
+        switch (kategorijaInput) {
+            case 1:
+                kategorija = "mokesèiai";
+                break;
+            case 2:
+                kategorija = "nuoma";
+                break;
+            case 3:
+                kategorija = "maistas";
+                break;
+            case 4:
+                kategorija = "pramogos";
+                break;
+            case 5:
+                kategorija = "dovanos";
+                break;
+            case 6:
+                kategorija = "kita";
+                break;
+        }
 //                String kategorija = "kategorija";
 //                System.out.println("Áveskite atsiskaitymo bûdà(grynieji, kortele, pavedimas)");
 //                String atsiskaitymoBudas = sc.next();
-                String atsiskaitymoBudas = "budas";
+        String atsiskaitymoBudas = "budas";
 //                System.out.println("Papildoma informacija");
 //                String papildomaInfo = sc.next();
-                String papildomaInfo = "info";
-                islaidos[i] = new IslaiduIrasas(suma, laikas, kategorija, atsiskaitymoBudas, papildomaInfo);
-                break;
-            }
-        }
+        String papildomaInfo = "info";
+        islaidos.add( new IslaiduIrasas(suma, laikas, kategorija, atsiskaitymoBudas, papildomaInfo));
+
         gautiIslaiduSuma();
     }
 
     public PajamuIrasas gautiPajamuIrasa(int i) {
-        return pajamos[i];
+        return pajamos.get(i);
     }
 
     public IslaiduIrasas gautiIslaiduIrasa(int i) {
-        return islaidos[i];
+        return islaidos.get(i);
     }
 
     public void balansas(){
         System.out.println("Biudþeto balansas: " + (gautiPajamuSuma() - gautiIslaiduSuma()) + "Eur");
     }
 
-    public PajamuIrasas[] getPajamos() {
+    public void spausdintiPajamas() {
+        for (PajamuIrasas irasai : pajamos ) {
+            System.out.println(irasai.toString());
+        }
+    }
+    public void spausdintiIslaidas() {
+        for (IslaiduIrasas irasai : islaidos ) {
+            System.out.println(irasai.toString());
+        }
+    }
+
+    public ArrayList<PajamuIrasas> getPajamos() {
         return pajamos;
     }
 
-    public IslaiduIrasas[] getIslaidos() {
+    public ArrayList<IslaiduIrasas> getIslaidos() {
         return islaidos;
     }
 }

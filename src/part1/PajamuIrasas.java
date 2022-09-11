@@ -6,7 +6,9 @@ import java.time.format.DateTimeFormatter;
 
 
 public class PajamuIrasas {
-    private int suma;
+    private static int counter;
+    private int id;
+    private double suma;
     private LocalDate data;
     private String kategorija;
     private boolean pozymisArIBanka;
@@ -15,13 +17,15 @@ public class PajamuIrasas {
     private DateTimeFormatter dateFormater = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public PajamuIrasas(){
+        this.id = counter++;
         this.suma = 1000;
         this.data = LocalDate.parse("2022-12-25", dateFormater);
         this.kategorija = "dovana";
         this.pozymisArIBanka = true;
         this.papildomaInfo = "bonusas";
     };
-    public PajamuIrasas(int suma,String data, String kategorija, boolean pozymisArIBanka, String papildomaInfo) {
+    public PajamuIrasas(double suma,String data, String kategorija, boolean pozymisArIBanka, String papildomaInfo) {
+        this.id = counter++;
         this.suma = suma;
         this.data = LocalDate.parse(data, dateFormater);
         this.kategorija = kategorija;
@@ -31,8 +35,9 @@ public class PajamuIrasas {
 
     @Override
     public String toString(){
-        return String.format("Pajamø áraðas%n|Suma:%15d Eur |Data: %20s |Kategorija: %15s " +
-                "|Pajamos á bankà: %b |Papildoma informacija: %s",
+        return String.format("Pajamø áraðas nr.:%3d | Suma:%10d Eur | Data: %10s | Kategorija: %15s " +
+                "| Pajamos á bankà: %b | Papildoma informacija: %s |",
+                id,
                 suma,
                 data.format(dateFormater),
                 kategorija,
@@ -40,11 +45,11 @@ public class PajamuIrasas {
                 papildomaInfo
         );
     }
-    public int getSuma() {
+    public double getSuma() {
         return suma;
     }
 
-    public void setSuma(int suma) {
+    public void setSuma(double suma) {
         this.suma = suma;
     }
 
