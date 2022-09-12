@@ -38,7 +38,7 @@ public class Biudzetas {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Áveskite pajamø sumà");
-        int suma = sc.nextInt();
+        double suma = sc.nextDouble();
 //                System.out.println("Áveskite datà (yyyy-MM-dd)");
 //                String data = sc.next();
         String data = "2022-12-12";
@@ -88,7 +88,7 @@ public class Biudzetas {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Áveskite iðlaidø sumà");
-        int suma = sc.nextInt();
+        double suma = sc.nextDouble();
         sc.nextLine();
 //                System.out.println("Áveskite datà ir laikà formatu yyyy, MM, dd, HH:mm");
 //                String laikas = sc.nextLine();
@@ -160,6 +160,25 @@ public class Biudzetas {
         }
     }
 
+    public void pasalintiPajamuIrasa(int i){
+        for ( int j = 0; j < pajamos.size(); j++ ) {
+            if (pajamos.get(j).getId() == i) {
+                pajamos.remove(j);
+                System.out.println("Paðalintas áraðas, kurio nr: " + i);
+                break;
+            }
+        }
+    }
+
+    public void pasalintiIslaiduIrasa(int i){
+        for (int j = 0; j < islaidos.size(); j++) {
+            if (islaidos.get(j).getId() == i) {
+                islaidos.remove(j);
+                System.out.println("Paðalintas áraðas, kurio nr: " + i);
+                break;
+            }
+        }
+    }
     public ArrayList<PajamuIrasas> getPajamos() {
         return pajamos;
     }

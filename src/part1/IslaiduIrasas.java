@@ -33,7 +33,7 @@ public class IslaiduIrasas {
 
     @Override
     public String toString(){
-        return String.format("Iðlaidø áraðas nr.:%3d | Suma:%10d Eur | Data: %10s | Kategorija: %15s " +
+        return String.format("Iðlaidø áraðas nr.:%3d | Suma:%10.2f Eur | Data: %10s | Kategorija: %15s " +
                 "| Atsiskaitymo bûdas: %b | Papildoma informacija: %s |",
                 id,
                 suma,
@@ -42,6 +42,10 @@ public class IslaiduIrasas {
                 atsiskaitymoBudas,
                 papildomaInfo
         );
+    }
+
+    public int getId() {
+        return id;
     }
 
     public double getSuma() {

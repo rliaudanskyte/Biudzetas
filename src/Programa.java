@@ -15,9 +15,11 @@ public class Programa {
                     [2] - naujas iðlaidø áraðas,
                     [3] - rasti pajamø áraðà,
                     [4] - rasti iðlaidø áraðà,
-                    [5] - spausdinti visas pajamas,
-                    [6] - spausdinti visas iðlaidas,
-                    [7] - biudþeto balansas,
+                    [5] - iðtrinti pajamø áraðà,
+                    [6] - iðtrinti iðlaidø áraðà,
+                    [7] - spausdinti visas pajamas,
+                    [8] - spausdinti visas iðlaidas,
+                    [9] - biudþeto balansas,
                     [0] - baigti programà""");
             Scanner sc = new Scanner(System.in);
             int actionChoice = sc.nextInt();
@@ -52,13 +54,25 @@ public class Programa {
                     break;
                 case 5:
                     biudzetas.spausdintiPajamas();
-                    biudzetas.gautiPajamuSuma();
+                    System.out.println("Áveskite áraðo numerá");
+                    index = sc.nextInt();
+                    biudzetas.pasalintiPajamuIrasa(index);
                     break;
                 case 6:
                     biudzetas.spausdintiIslaidas();
-                    biudzetas.gautiIslaiduSuma();
+                    System.out.println("Áveskite áraðo numerá");
+                    index = sc.nextInt();
+                    biudzetas.pasalintiIslaiduIrasa(index);
                     break;
                 case 7:
+                    biudzetas.spausdintiPajamas();
+                    biudzetas.gautiPajamuSuma();
+                    break;
+                case 8:
+                    biudzetas.spausdintiIslaidas();
+                    biudzetas.gautiIslaiduSuma();
+                    break;
+                case 9:
                     biudzetas.balansas();
                     break;
                 case 0:

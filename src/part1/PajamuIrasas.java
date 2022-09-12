@@ -35,7 +35,7 @@ public class PajamuIrasas {
 
     @Override
     public String toString(){
-        return String.format("Pajamø áraðas nr.:%3d | Suma:%10d Eur | Data: %10s | Kategorija: %15s " +
+        return String.format("Pajamø áraðas nr.:%3d | Suma:%10.2f Eur | Data: %10s | Kategorija: %15s " +
                 "| Pajamos á bankà: %b | Papildoma informacija: %s |",
                 id,
                 suma,
@@ -45,6 +45,11 @@ public class PajamuIrasas {
                 papildomaInfo
         );
     }
+
+    public int getId() {
+        return id;
+    }
+
     public double getSuma() {
         return suma;
     }
