@@ -8,6 +8,17 @@ public class Programa {
     public static void main(String[] args) {
         Biudzetas biudzetas = new Biudzetas();
 
+        // laikinai pridedami duomenys testavimui
+        biudzetas.getPajamos().add(new PajamuIrasas(155.12, "2020-12-10", "atlyginimas", true, "lapkrièio mënesio atlyginimas" ));
+        biudzetas.getPajamos().add(new PajamuIrasas(1200, "2021-08-21", "paveldejimas", true, "" ));
+        biudzetas.getPajamos().add(new PajamuIrasas(12.5, "2022-01-01", "loterija", false, "kampai" ));
+        biudzetas.getPajamos().add(new PajamuIrasas(100, "2010-08-30", "vokelis", true, "ið rëmëjo" ));
+        biudzetas.getIslaidos().add(new IslaiduIrasas(50.95, "2022-09-12 21:10", "maistas", "kortele", "maistas savaitei"));
+        biudzetas.getIslaidos().add(new IslaiduIrasas(21.84, "2022-09-20 14:45", "mokesèiai", "pavedimu", "uþ rugpûtá"));
+        biudzetas.getIslaidos().add(new IslaiduIrasas(45, "2022-11-09 07:02", "pramogos", "grynais", "bilietai"));
+        biudzetas.getIslaidos().add(new IslaiduIrasas(120, "2022-07-29 16:49", "kita", "kortele", ""));
+
+
         while (true) {
             System.out.println("""
                     Pasirinkite veiksmà:

@@ -33,8 +33,8 @@ public class IslaiduIrasas {
 
     @Override
     public String toString(){
-        return String.format("Iðlaidø áraðas nr.:%3d | Suma:%10.2f Eur | Data: %10s | Kategorija: %15s " +
-                "| Atsiskaitymo bûdas: %b | Papildoma informacija: %s |",
+        return String.format("Iðlaidø áraðas nr.:%3d | Suma:%10.2f Eur | Data: %10s | Kategorija: %10s " +
+                "| Atsiskaitymo bûdas: %10s | Papildoma informacija: %-25s |",
                 id,
                 suma,
                 dataSuLaiku.format(formaterWithTime),

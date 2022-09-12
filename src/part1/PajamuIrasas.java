@@ -36,7 +36,7 @@ public class PajamuIrasas {
     @Override
     public String toString(){
         return String.format("Pajamø áraðas nr.:%3d | Suma:%10.2f Eur | Data: %10s | Kategorija: %15s " +
-                "| Pajamos á bankà: %b | Papildoma informacija: %s |",
+                "| Pajamos á bankà: %6b | Papildoma informacija: %-30s |",
                 id,
                 suma,
                 data.format(dateFormater),
