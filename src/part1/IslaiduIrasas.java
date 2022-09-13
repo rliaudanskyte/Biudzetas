@@ -1,40 +1,28 @@
 package part1;
 
+import part3.Irasas;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class IslaiduIrasas {
-    private static int counter;
-    private int id;
-    private double suma;
+public class IslaiduIrasas extends Irasas {
     private LocalDateTime dataSuLaiku;
-    private String kategorija;
     private String atsiskaitymoBudas;
-    private String papildomaInfo;
     private DateTimeFormatter formaterWithTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public IslaiduIrasas() {
-        this.id = counter++;
-        this.suma = 125;
-        this.dataSuLaiku = LocalDateTime.parse("2022-12-24 23:50", formaterWithTime);
-        this.kategorija = "Maistas";
-        this.atsiskaitymoBudas = "kortele";
-        this.papildomaInfo = "Sveèiams";
-    }
-
     public IslaiduIrasas(double suma, String dataSuLaiku, String kategorija, String atsiskaitymoBudas, String papildomaInfo) {
-        this.id = counter++;
-        this.suma = suma;
+        super.id = super.counter++;
+        super.suma = suma;
         this.dataSuLaiku = LocalDateTime.parse(dataSuLaiku, formaterWithTime);
-        this.kategorija = kategorija;
+        super.kategorija = kategorija;
         this.atsiskaitymoBudas = atsiskaitymoBudas;
-        this.papildomaInfo = papildomaInfo;
+        super.papildomaInfo = papildomaInfo;
     }
 
-    @Override
+    @Override //todo: perkelti dalá kodo á tëvinæ klasë
     public String toString(){
-        return String.format("Iðlaidø áraðas nr.:%3d | Suma:%10.2f Eur | Data: %10s | Kategorija: %10s " +
-                "| Atsiskaitymo bûdas: %10s | Papildoma informacija: %-25s |",
+        return String.format("Iðlaidø áraðas nr.:%3d | Suma:%10.2f Eur | Data: %16s | Kategorija: %15s " +
+                "| Atsiskaitymo bûdas: %10s | Papildoma informacija: %-20s |",
                 id,
                 suma,
                 dataSuLaiku.format(formaterWithTime),
@@ -44,33 +32,14 @@ public class IslaiduIrasas {
         );
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public double getSuma() {
-        return suma;
-    }
-
-    public void setSuma(double suma) {
-        this.suma = suma;
-    }
-
     public LocalDateTime getDataSuLaiku() {
         return dataSuLaiku;
     }
 
-    public void setDataSuLaiku(LocalDateTime dataSuLaiku) {
-        this.dataSuLaiku = dataSuLaiku;
+    public void setDataSuLaiku(String  dataSuLaiku) {
+        this.dataSuLaiku = LocalDateTime.parse(dataSuLaiku, formaterWithTime);
     }
-
-    public String getKategorija() {
-        return kategorija;
-    }
-
-    public void setKategorija(String kategorija) {
-        this.kategorija = kategorija;
-    }
+    //LocalDateTime.parse(dataSuLaiku, formaterWithTime);
 
     public String getAtsiskaitymoBudas() {
         return atsiskaitymoBudas;
@@ -78,14 +47,6 @@ public class IslaiduIrasas {
 
     public void setAtsiskaitymoBudas(String atsiskaitymoBudas) {
         this.atsiskaitymoBudas = atsiskaitymoBudas;
-    }
-
-    public String getPapildomaInfo() {
-        return papildomaInfo;
-    }
-
-    public void setPapildomaInfo(String papildomaInfo) {
-        this.papildomaInfo = papildomaInfo;
     }
 
     public DateTimeFormatter getFormaterWithTime() {
