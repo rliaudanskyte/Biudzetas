@@ -1,6 +1,7 @@
 package part1;
 
 import part3.Irasas;
+import part3.VartotojoSasaja;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,22 +36,18 @@ public class Biudzetas {
     }
 
     public void pridetiPajamuIrasa() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Áveskite pajamø sumà");
-        double suma = sc.nextDouble();
+        double suma = Double.parseDouble(VartotojoSasaja.paprasytiString("Áveskite pajamø sumà"));
 //                System.out.println("Áveskite datà (yyyy-MM-dd)");
 //                String data = sc.next();
         String data = "2022-12-12";
-        System.out.println("""
+        int kategorijaInput = Integer.parseInt(VartotojoSasaja.paprasytiString("""
                 Pasirinkite pajamø kategorijà:
                 [1] - atlyginimas,
                 [2] - dovana,
                 [3] - loterija,
                 [4] - paveldëjimas,
                 [5] - kyðis,
-                [6] - kita""");
-        int kategorijaInput = sc.nextInt();
+                [6] - kita"""));
         String kategorija = "";
         switch (kategorijaInput) {
             case 1:
@@ -78,7 +75,7 @@ public class Biudzetas {
         boolean pozymisArIBanka = true;
 //                System.out.println("Papildoma informacija");
 //                String papildomaInfo = sc.next();
-        String papildomaInfo = "Nesi Mates tokios info";
+        String papildomaInfo = "Normal info";
         irasai.add(new PajamuIrasas(suma, data, kategorija, pozymisArIBanka, papildomaInfo));
 
         gautiPajamuSuma();
@@ -129,8 +126,7 @@ public class Biudzetas {
 //                System.out.println("Áveskite atsiskaitymo bûdà(grynieji, kortele, pavedimas)");
 //                String atsiskaitymoBudas = sc.next();
         String atsiskaitymoBudas = "budas";
-//                System.out.println("Papildoma informacija");
-//                String papildomaInfo = sc.next();
+//                String papildomaInfo = VartotojoSasaja.paprasytiString("Papildoma informacija");
         String papildomaInfo = "info";
         irasai.add(new IslaiduIrasas(suma, laikas, kategorija, atsiskaitymoBudas, papildomaInfo));
 
@@ -146,14 +142,31 @@ public class Biudzetas {
     }
 
     public void spausdintiIrasus() {
-        for (Irasas irasas : irasai) {
-            if (irasas instanceof PajamuIrasas) {
-                System.out.println(((PajamuIrasas) irasas).toString());
-            } else if (irasas instanceof IslaiduIrasas) {
-                System.out.println(((IslaiduIrasas) irasas).toString());
-            } else {
-                continue;
+        int index = Integer.parseInt(VartotojoSasaja.paprasytiString("Kà spausdinti?\n" +
+                "[1] - visus áraðus,\n" +
+                "[2] - pajamø áraðus,\n" +
+                "[3] - iðlaidø áraðus"));
+        switch (index) {
+            case 1: {
+                for (Irasas irasas : irasai) {
+                    if (irasas instanceof PajamuIrasas) {
+                        System.out.println(((PajamuIrasas) irasas).toString());
+                    } else if (irasas instanceof IslaiduIrasas) {
+                        System.out.println(((IslaiduIrasas) irasas).toString());
+                    } else {
+                        continue;
+                    }
+                }
+                break;
             }
+            case 2:
+                spausdintiPajamas();
+                gautiPajamuSuma();
+                break;
+            case 3:
+                spausdintiIslaidas();
+                gautiIslaiduSuma();
+                break;
         }
     }
 
@@ -198,7 +211,6 @@ public class Biudzetas {
                 redaguotinasIrasas.setSuma(sc.nextDouble());
             }
 
-            // todo: neveikia datos paëmimas
             System.out.println("Data: " + ((PajamuIrasas) redaguotinasIrasas).getData().format(((PajamuIrasas) redaguotinasIrasas).getDateFormater()));
             System.out.println(optionsForEdit);
             inputNum = sc.nextInt();
@@ -264,7 +276,7 @@ public class Biudzetas {
 
 
         } else {
-            System.out.println((((IslaiduIrasas) redaguotinasIrasas).toString()));
+            System.out.println(redaguotinasIrasas);
 
             System.out.println("Suma: " + redaguotinasIrasas.getSuma() + "Eur");
             System.out.println(optionsForEdit);
@@ -274,7 +286,6 @@ public class Biudzetas {
                 redaguotinasIrasas.setSuma(sc.nextDouble());
             }
 
-            // todo: neveikia datos paëmimas
             System.out.println("Data: " + ((IslaiduIrasas) redaguotinasIrasas).getDataSuLaiku().format(((IslaiduIrasas) redaguotinasIrasas).getFormaterWithTime()));
             System.out.println(optionsForEdit);
             inputNum = sc.nextInt();
@@ -356,5 +367,9 @@ public class Biudzetas {
             printText = "Tokio áraðo nëra";
         }
         System.out.println(printText);
+    }
+
+    public void setIrasai(ArrayList<Irasas> irasai) {
+        this.irasai = irasai;
     }
 }

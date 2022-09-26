@@ -10,7 +10,11 @@ public class PajamuIrasas extends Irasas {
     private boolean pozymisArIBanka;
     private DateTimeFormatter dateFormater = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public PajamuIrasas(double suma,String data, String kategorija, boolean pozymisArIBanka, String papildomaInfo) {
+    public PajamuIrasas(double suma,
+                        String data,
+                        String kategorija,
+                        boolean pozymisArIBanka,
+                        String papildomaInfo) {
         super.id = super.counter++;
         super.suma = suma;
         this.data = LocalDate.parse(data, dateFormater);
@@ -20,16 +24,26 @@ public class PajamuIrasas extends Irasas {
     }
 
     @Override
-    public String toString(){
-        return String.format("Pajamø áraðas nr.:%4d | Suma:%10.2f Eur | Data: %16s | Kategorija: %15s " +
-                "| Pajamos á bankà: %13b | Papildoma informacija: %-20s |",
-                id,
-                suma,
+    public String toString() {
+        return String.format("%s Data: %16s | Kategorija: %15s " +
+                        "| Pajamos á bankà: %13b | Papildoma informacija: %-20s |",
+                super.toString(),
                 data.format(dateFormater),
                 kategorija,
                 pozymisArIBanka,
                 papildomaInfo
         );
+    }
+
+    @Override
+    public String toStringToCsv() {
+        return String.format("%s,%s,%s,%s,%b,%s%n",
+                "P",
+                super.toStringToCsv(),
+                data.format(dateFormater),
+                kategorija,
+                pozymisArIBanka,
+                papildomaInfo);
     }
 
     public LocalDate getData() {

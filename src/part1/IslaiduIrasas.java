@@ -10,7 +10,11 @@ public class IslaiduIrasas extends Irasas {
     private String atsiskaitymoBudas;
     private DateTimeFormatter formaterWithTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public IslaiduIrasas(double suma, String dataSuLaiku, String kategorija, String atsiskaitymoBudas, String papildomaInfo) {
+    public IslaiduIrasas(double suma,
+                         String dataSuLaiku,
+                         String kategorija,
+                         String atsiskaitymoBudas,
+                         String papildomaInfo) {
         super.id = super.counter++;
         super.suma = suma;
         this.dataSuLaiku = LocalDateTime.parse(dataSuLaiku, formaterWithTime);
@@ -19,12 +23,11 @@ public class IslaiduIrasas extends Irasas {
         super.papildomaInfo = papildomaInfo;
     }
 
-    @Override //todo: perkelti dalá kodo á tëvinæ klasë
-    public String toString(){
-        return String.format("Iðlaidø áraðas nr.:%3d | Suma:%10.2f Eur | Data: %16s | Kategorija: %15s " +
-                "| Atsiskaitymo bûdas: %10s | Papildoma informacija: %-20s |",
-                id,
-                suma,
+    @Override
+    public String toString() {
+        return String.format("%s Data: %16s | Kategorija: %15s " +
+                        "| Atsiskaitymo bûdas: %10s | Papildoma informacija: %-20s |",
+                super.toString(),
                 dataSuLaiku.format(formaterWithTime),
                 kategorija,
                 atsiskaitymoBudas,
@@ -32,11 +35,22 @@ public class IslaiduIrasas extends Irasas {
         );
     }
 
+    @Override
+    public String toStringToCsv() {
+        return String.format("%s,%s,%s,%s,%s,%s%n",
+                "I",
+                super.toStringToCsv(),
+                dataSuLaiku.format(formaterWithTime),
+                kategorija,
+                atsiskaitymoBudas,
+                papildomaInfo);
+    }
+
     public LocalDateTime getDataSuLaiku() {
         return dataSuLaiku;
     }
 
-    public void setDataSuLaiku(String  dataSuLaiku) {
+    public void setDataSuLaiku(String dataSuLaiku) {
         this.dataSuLaiku = LocalDateTime.parse(dataSuLaiku, formaterWithTime);
     }
     //LocalDateTime.parse(dataSuLaiku, formaterWithTime);

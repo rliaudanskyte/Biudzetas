@@ -7,6 +7,19 @@ public class Irasas {
     protected String kategorija;
     protected String papildomaInfo;
 
+    @Override
+    public String toString(){
+        return String.format("Iðlaidø áraðas nr.:%3d | Suma:%10.2f Eur |",
+                id,
+                suma);
+    }
+
+    public String toStringToCsv(){
+        return String.format("%d,%.2f",
+                id,
+                suma);
+    }
+
     public int getId() {
         return id;
     }
