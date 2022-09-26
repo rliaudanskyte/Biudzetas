@@ -37,7 +37,7 @@ public class Failas {
         lines.forEach(line -> {
             System.out.println(line);
             List<String> dalys = Arrays.asList(line.split(","));
-                if (dalys.get(0) == "P") {
+                if (dalys.get(0).equals("P")) {
                     gautiIrasai.add(new PajamuIrasas(
                             Double.parseDouble(dalys.get(2)), //double suma
                             dalys.get(3), //string data
@@ -46,7 +46,7 @@ public class Failas {
                             dalys.get(6) //String papildomaInfo
                     ));
 
-                } else if (dalys.get(0) == "I") {
+                } else if (dalys.get(0).equals("I")) {
                     gautiIrasai.add(new IslaiduIrasas(
                             Double.parseDouble(dalys.get(2)), //double suma
                             dalys.get(3), //string dataSuLaiku
@@ -54,8 +54,9 @@ public class Failas {
                             dalys.get(5), // Sting Atsiskaitymo budas
                             dalys.get(6) //String papildomaInfo
                     ));
+                } else {
+                    throw new RuntimeException("Iraðas neaiðkus");
                 }
-
         });
         return gautiIrasai;
     }

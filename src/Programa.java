@@ -6,6 +6,7 @@ import part3.VartotojoSasaja;
 import part4.Failas;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Programa {
@@ -77,7 +78,9 @@ public class Programa {
                         Failas.issaugotiDuomenis(biudzetas.getIrasai());
                         break;
                     case 9:
-                        biudzetas.setIrasai(Failas.gautiDuomenis());
+                        ArrayList<Irasas> naujasSarasas = Failas.gautiDuomenis();
+                        biudzetas.setIrasai(naujasSarasas);
+                        biudzetas.spausdintiIrasus();
                         break;
                     case 0:
                         System.out.println("Programos pabaiga");
