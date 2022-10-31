@@ -5,6 +5,7 @@ import part3.VartotojoSasaja;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -76,31 +77,31 @@ public class Biudzetas {
 //                System.out.println("Papildoma informacija");
 //                String papildomaInfo = sc.next();
         String papildomaInfo = "Normal info";
-        irasai.add(new PajamuIrasas(suma, data, kategorija, pozymisArIBanka, papildomaInfo));
+        irasai.add(new PajamuIrasas(
+                suma,
+                LocalDate.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                kategorija,
+                pozymisArIBanka,
+                papildomaInfo
+        ));
 
         gautiPajamuSuma();
     }
 
     public void pridetiIslaiduIrasa() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Áveskite iðlaidø sumà");
-        double suma = sc.nextDouble();
-        sc.nextLine();
+        double suma = Double.parseDouble(VartotojoSasaja.paprasytiString("Áveskite iðlaidø sumà"));
 //                System.out.println("Áveskite datà ir laikà formatu yyyy, MM, dd, HH:mm");
 //                String laikas = sc.nextLine();
-        String laikas = "2022-08-08 15:45";
-        System.out.println("Pasirinkite iðlaidø kategorijà");
-        System.out.println("""
-                Pasirinkite veiksmà:
+        var laikas = LocalDateTime.parse("2022-08-08 15:45", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+        int kategorijaInput = Integer.parseInt(VartotojoSasaja.paprasytiString("""
+                Pasirinkite iðlaidø kategorijà:
                 [1] - mokesèiai,
                 [2] - nuoma,
                 [3] - maistas,
                 [4] - pramogos,
                 [5] - dovanos,
-                [6] - kita""");
-
-        int kategorijaInput = sc.nextInt();
+                [6] - kita"""));
         String kategorija = "";
         switch (kategorijaInput) {
             case 1:
@@ -124,7 +125,7 @@ public class Biudzetas {
         }
 //                String kategorija = "kategorija";
 //                System.out.println("Áveskite atsiskaitymo bûdà(grynieji, kortele, pavedimas)");
-//                String atsiskaitymoBudas = sc.next();
+//                String atsiskaitymoBudas = VartotojoSasaja.paprasytiString("Áveskite atsiskaitymo bûdà(grynieji, kortele, pavedimas)");
         String atsiskaitymoBudas = "budas";
 //                String papildomaInfo = VartotojoSasaja.paprasytiString("Papildoma informacija");
         String papildomaInfo = "info";
@@ -201,7 +202,7 @@ public class Biudzetas {
         int inputNum = 0;
 
         if (redaguotinasIrasas instanceof PajamuIrasas) {
-            System.out.println((((PajamuIrasas) redaguotinasIrasas).toString()));
+            System.out.println(redaguotinasIrasas);
 
             System.out.println("Suma: " + redaguotinasIrasas.getSuma() + "Eur");
             System.out.println(optionsForEdit);

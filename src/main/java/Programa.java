@@ -4,10 +4,14 @@ import part1.PajamuIrasas;
 import part3.Irasas;
 import part3.VartotojoSasaja;
 import part4.Failas;
+import part5.Database;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.DoubleUnaryOperator;
 
 public class Programa {
     public static String pasirinkiteVeikstmà = """
@@ -19,23 +23,24 @@ public class Programa {
                     [5] - iðtrinti áraðà,
                     [6] - spausdinti áraðus,
                     [7] - biudþeto balansas,
-                    [8] - iðsaugoti duomenis á failà,
-                    [9] - gauti duomenis ið failo,
+                    [8] - iðsaugoti duomenis á duomenø bazæ,
+                    [9] - gauti duomenis ið duomenø bazës,
+                    [10] - eksportuoti duomenis á failà,
+                    [11] - importuoti duomenis ið failo,
                     [0] - baigti programà""";
     public static void main(String[] args) {
         Biudzetas biudzetas = new Biudzetas();
 
-        //todo: prideti vartotojo sasajos klasæ su metodais, kaip irase
 
         // laikinai pridedami duomenys testavimui
-        biudzetas.getIrasai().add(new IslaiduIrasas(45, "2022-11-09 07:02", "pramogos", "grynais", "bilietai"));
-        biudzetas.getIrasai().add(new PajamuIrasas(155.12, "2020-12-10", "atlyginimas", true, "lapkrièio atlygis" ));
-        biudzetas.getIrasai().add(new PajamuIrasas(1200, "2021-08-21", "paveldejimas", true, "none" ));
-        biudzetas.getIrasai().add(new PajamuIrasas(100, "2010-08-30", "vokelis", true, "ið rëmëjo" ));
-        biudzetas.getIrasai().add(new IslaiduIrasas(50.95, "2022-09-12 21:10", "maistas", "kortele", "maistas savaitei"));
-        biudzetas.getIrasai().add(new IslaiduIrasas(21.84, "2022-09-20 14:45", "mokesèiai", "pavedimu", "uþ rugpûtá"));
-        biudzetas.getIrasai().add(new PajamuIrasas(12.5, "2022-01-01", "loterija", false, "kampai" ));
-        biudzetas.getIrasai().add(new IslaiduIrasas(120, "2022-07-29 16:49", "kita", "kortele", "none"));
+//        biudzetas.getIrasai().add(new IslaiduIrasas(45, LocalDateTime.of(2022,11,9,7,2), "pramogos", "grynais", "bilietai"));
+//        biudzetas.getIrasai().add(new PajamuIrasas(155.12, LocalDate.of(2020,12,10), "atlyginimas", true, "lapkrièio atlygis" ));
+//        biudzetas.getIrasai().add(new PajamuIrasas(1200, LocalDate.of(2021,8,21), "paveldejimas", true, "none" ));
+//        biudzetas.getIrasai().add(new PajamuIrasas(100, LocalDate.of(2010,8,30), "vokelis", true, "ið rëmëjo" ));
+//        biudzetas.getIrasai().add(new IslaiduIrasas(50.95, LocalDateTime.of(2022,9,12,21,10), "maistas", "kortele", "maistas savaitei"));
+//        biudzetas.getIrasai().add(new IslaiduIrasas(21.84, LocalDateTime.of(2022,9,20,14,45), "mokesèiai", "pavedimu", "uþ rugpûtá"));
+//        biudzetas.getIrasai().add(new PajamuIrasas(12.5, LocalDate.of(2022,1,1), "loterija", false, "kampai" ));
+//        biudzetas.getIrasai().add(new IslaiduIrasas(120, LocalDateTime.of(2022,7,29,16,49), "kita", "kortele", "none"));
 
 
         while (true) {
@@ -75,11 +80,19 @@ public class Programa {
                         biudzetas.balansas();
                         break;
                     case 8:
-                        Failas.issaugotiDuomenis(biudzetas.getIrasai());
+                        Database.issaugotiDuomenis(biudzetas.getIrasai());
                         break;
                     case 9:
-                        ArrayList<Irasas> naujasSarasas = Failas.gautiDuomenis();
+                        ArrayList<Irasas> naujasSarasas = Database.gautiDuomenis();
                         biudzetas.setIrasai(naujasSarasas);
+                        biudzetas.spausdintiIrasus();
+                        break;
+                    case 10:
+                        Failas.issaugotiDuomenis(biudzetas.getIrasai());
+                        break;
+                    case 11:
+                        ArrayList<Irasas> naujasSarasasIsFailo = Failas.gautiDuomenis();
+                        biudzetas.setIrasai(naujasSarasasIsFailo);
                         biudzetas.spausdintiIrasus();
                         break;
                     case 0:

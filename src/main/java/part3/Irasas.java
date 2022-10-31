@@ -1,5 +1,7 @@
 package part3;
 
+import java.util.ArrayList;
+
 public class Irasas {
     protected static int counter;
     protected int id;
@@ -18,6 +20,13 @@ public class Irasas {
         return String.format("%d,%.2f",
                 id,
                 suma);
+    }
+
+    public ArrayList<String> toStringToDatabase(){
+        var result = new ArrayList<String>();
+        result.add(String.valueOf(id));
+        result.add(String.valueOf(suma));
+        return result;
     }
 
     public int getId() {

@@ -4,6 +4,7 @@ import part3.Irasas;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class IslaiduIrasas extends Irasas {
     private LocalDateTime dataSuLaiku;
@@ -11,13 +12,13 @@ public class IslaiduIrasas extends Irasas {
     private DateTimeFormatter formaterWithTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public IslaiduIrasas(double suma,
-                         String dataSuLaiku,
+                         LocalDateTime dataSuLaiku,
                          String kategorija,
                          String atsiskaitymoBudas,
                          String papildomaInfo) {
         super.id = super.counter++;
         super.suma = suma;
-        this.dataSuLaiku = LocalDateTime.parse(dataSuLaiku, formaterWithTime);
+        this.dataSuLaiku = dataSuLaiku;
         super.kategorija = kategorija;
         this.atsiskaitymoBudas = atsiskaitymoBudas;
         super.papildomaInfo = papildomaInfo;
@@ -44,6 +45,17 @@ public class IslaiduIrasas extends Irasas {
                 kategorija,
                 atsiskaitymoBudas,
                 papildomaInfo);
+    }
+
+    @Override
+    public ArrayList<String> toStringToDatabase() {
+        var result = new ArrayList<>(super.toStringToDatabase());
+        result.add(dataSuLaiku.format(formaterWithTime) + ":00");
+        result.add(kategorija);
+        result.add(atsiskaitymoBudas);
+        result.add(papildomaInfo);
+        result.add("I");
+        return result;
     }
 
     public LocalDateTime getDataSuLaiku() {

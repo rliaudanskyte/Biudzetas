@@ -4,6 +4,7 @@ import part3.Irasas;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class PajamuIrasas extends Irasas {
     private LocalDate data;
@@ -11,13 +12,13 @@ public class PajamuIrasas extends Irasas {
     private DateTimeFormatter dateFormater = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public PajamuIrasas(double suma,
-                        String data,
+                        LocalDate data,
                         String kategorija,
                         boolean pozymisArIBanka,
                         String papildomaInfo) {
         super.id = super.counter++;
         super.suma = suma;
-        this.data = LocalDate.parse(data, dateFormater);
+        this.data = data;
         super.kategorija = kategorija;
         this.pozymisArIBanka = pozymisArIBanka;
         super.papildomaInfo = papildomaInfo;
@@ -44,6 +45,17 @@ public class PajamuIrasas extends Irasas {
                 kategorija,
                 pozymisArIBanka,
                 papildomaInfo);
+    }
+
+    @Override
+    public ArrayList<String> toStringToDatabase() {
+        var result = new ArrayList<>(super.toStringToDatabase());
+        result.add(data.format(dateFormater) + " 00:00:000");
+        result.add(kategorija);
+        result.add(String.valueOf(pozymisArIBanka));
+        result.add(papildomaInfo);
+        result.add("P");
+        return result;
     }
 
     public LocalDate getData() {
